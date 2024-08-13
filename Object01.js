@@ -49,7 +49,18 @@ const jsUser={
     [mysym]:"mykey1",//this will ot act as a symbol;
 }
 
-console.log(typeof(jsUser.mysym));
+console.log(jsUser[mysym]);//Symbol
+
+
+//Object.freeze(jsUser);
+jsUser.email="xyz@email.com";
+console.log(jsUser.email);
+
+
+jsUser.greeting= function(){
+    console.log("hello");
+}
+console.log(jsUser.greeting());
 
 
 
