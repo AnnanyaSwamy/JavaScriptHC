@@ -80,9 +80,28 @@ for (const key in myObj){
     console.log(key,"->",myObj[key]);
 }
 
+//for each
+
+const coding=['js', 'ruby', 'java', 'python', 'cpp']
+coding.forEach(function(val){
+    console.log(val);
+})
+coding.forEach((item)=>{
+    console.log(item);
+})
 
 
 
+function printme(item){
+    console.log(item);
+}
+coding.forEach(printme);
+
+coding.forEach((item, index, arr)=>{
+    console.log(index, "->", item, " ", arr);
+})
+
+//for each doesnt return values returns undfined everytime
 
 
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        .bg-black{
+            background-color: #212121;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <div >
+        <h1 id="title" class="heading">Learning DOM <span style="display: none;">Test Text</span></h1>
+        <h2>Lorem ipsum dolor sit amet.</h2>
+        <h2>Lorem ipsum dolor sit amet.</h2>
+        <h2>Lorem ipsum dolor sit amet.</h2>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <input type="password" placeholder="Enter password">
+        
+        <ul>
+            <li class="list-item">two</li>
+            <li class="list-item">three</li>
+            <li class="list-item">one</li>
+        </ul>
+    </div>
+    
+</body>
+</html>
+
+<!-- 
+document.getElementById('title')
+document.getElementById('title').id
+document.getElementById('title').class//returns undefined
+document.getElementById('title').className
+document.getElementById('title').getAttribute('required attr')
+document.getElementById('title').setAttribute('required attr', 'value to be set for that attr')
+const title=document.getElementById('title')
+title.style.backgroundColor='green'
+title.style.padding='15px'
+title.style.border-radius='15px'
+-->
+
+
+<!-- 
+const title=document.getElementById('title')
+title.textContent// Learning DOM Test Text //doesnt show hidden
+title.innerHTML// entire html
+title.innerText// Learning DOM Test Text //shows hidden
+document.getElementByClassName('heading')
+-->
+
+<!-- 
+    document.querySelector('h2')
+    document.querySelector('#title')
+    document.querySelector('.heading')
+    document.querySelector('input[type="password"]')
+    const tempLiList=document.querySelectorAll('li')//return Nodelist
+    //Node list is not the same as array but a lot of things are similar
+    tempLiList[0].style.color='green'
+    OR
+    tempLiList.forEach(function (l){
+        l.style.color='green';
+    })
+-->
+
+<!-- 
+const tempClassList=document.getElementsByClassName('list-item')//return HTML collection
+now convert it to array to use iterators on it
+Array.from(tempClassList);//now you can use all loops
+-->
