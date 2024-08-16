@@ -1,0 +1,9 @@
+*{
+    font-family: "Dancing Script", cursive;
+    background-color: bisque;
+    color: rgb(255, 166, 0);
+}
+
+input{
+    border: 2px solid orange;
+}

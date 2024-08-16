@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    <ul class="language">
+        <li>Javascript</li>
+    </ul>
+</body>
+<script>
+    function addLangName(langName){
+        const li=document.createElement('li');
+        li.innerHTML=`${langName}`;
+        document.querySelector('.language').appendChild(li);
+    }
+    addLangName("Python");
+    addLangName("TypeScript");
+
+    function addOptiLanguage(language){
+        const li=document.createElement('li');
+        li.appendChild(document.createTextNode(`${language}`));
+        document.querySelector('.language').appendChild(li);
+    }
+    addOptiLanguage("C#");
+
+    function editListElements(element, index){
+        document.querySelector(`${element}:nth-child(${index})`).innerHTML='Mojo';
+    }
+
+    editListElements('li','2');
+    editListElements('li','1');
+    //OR 
+    //const firstLang=document.querySelector("li:first-child")
+    //firstLang.outerHTML='<li>TypeScript</li>'
+
+    const lastLang=document.querySelector('li:last-child');
+    lastLang.remove();
+
+</script>
+</html>
+
+<!-- 
+
+-->
