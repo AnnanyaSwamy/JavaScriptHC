@@ -9,6 +9,7 @@ document.querySelector('form').addEventListener('submit', function(e){
     const input=parseInt(document.querySelector('#number-guessed').value);
     if(input===rand){
         document.querySelector('.results').innerText=`Congratulations! ${rand} is the correct number.`
+        document.querySelector('.reload').value='Start Over'
         document.querySelector('.reload').setAttribute('style', 'visibility: visible');
         document.querySelector('.reload').addEventListener('click', function(){
             location.reload();
@@ -30,6 +31,7 @@ document.querySelector('form').addEventListener('submit', function(e){
     if(attempts===0){
         document.querySelector('.results').innerText=`Oops! You lost, Start over.`
         document.querySelector('.reload').setAttribute('style', 'visibility: visible');
+        document.querySelector('.reload').value='Start Over'
         document.querySelector('.reload').addEventListener('click', function(){
             location.reload();
         });
