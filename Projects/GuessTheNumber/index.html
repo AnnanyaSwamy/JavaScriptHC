@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess-The-Number</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Number Guessing Game</h1>
+        <p>Try and guess a random number between 1 and 100<br>You have <span class="no-of-attempts-left">10</span> attempts left</p>
+        <h1>Guess a Number</h1>
+        <form>
+            <input type="text" id="number-guessed">
+            <input type="submit" class="button-style">
+        </form>
+        <p class="advice"></p>
+        <h2>Previous Guesses: </h2>
+        <p class="previous-guesses"></p>
+        <h2>Guesses Remaining: </h2>
+        <p class="remaining-guesses">10</p>
+        <h2 class="results"></h2>
+        <button class="reload" style="visibility: hidden;">Start Over</button>
+    </div>
+    <script src="script.js"></script>
+</body> 
+</html>

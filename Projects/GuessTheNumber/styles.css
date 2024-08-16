@@ -1,0 +1,40 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: "Silkscreen", sans-serif;
+    background-color: bisque;
+    color: #FF5580;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3, h4{
+    color: #FF0080;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+input{
+    border: 2px solid #FF0080;
+    border-radius: 20px;
+}
+
+input[type="submit"]{
+    padding: 3px;
+    border: 2px solid #FF0080;
+    border-radius: 20px;
+    background-color: #FF0080;
+    color: bisque;
+}
