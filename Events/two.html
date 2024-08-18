@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <h1>code</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+
+    const timeOut=setTimeout(function(){
+            console.log("Annanya")
+        }, 2000)
+
+    document.getElementById("stop").addEventListener('click',function(){
+        clearTimeout(timeOut);
+        console.log("Stopped");
+    })
+    //set timeout is a method that calls api
+    //handler is a callback function that does not have a name
+    //clearTimeout(Arg/reference to which timeout) require timeout of what timeout you want to remove
+</script>
+</html>

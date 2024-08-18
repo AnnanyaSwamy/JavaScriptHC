@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #414141; color: white;">
+    <h2>Food</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="bear" src="https://i.pinimg.com/originals/a3/0a/7a/a30a7a2c5ed71d8f368f243529bef1ab.jpg" alt="Bear Dumpling"></li>
+            <li><img width="200px" src="https://i.pinimg.com/originals/b6/07/20/b60720f24b77e809f776e0f79f653db3.jpg" alt="Pancakes"></li>
+            <li><img width="200px" src="https://i.pinimg.com/originals/f0/4a/2c/f04a2c891f74ef37482a37d224818304.jpg" alt="Tart"></li>
+            <li><img width="200px" src="https://i.pinimg.com/originals/b0/d9/af/b0d9af5231b804b4fc8ce5c5d6748256.jpg" alt="Breakfast Toast"></li>
+            <li><img width="200px" src="https://i.pinimg.com/originals/58/c8/64/58c864d2d88a58b12587893955d44615.jpg" alt="Cake Roll"></li>
+            <li><a id="google" style="text-decoration: none; color: white;" href="https://google.com">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    document.getElementById('images').addEventListener('click',function(e){
+        console.log("Clicked inside UL");
+    },false)
+
+    document.getElementById('bear').addEventListener('click',function(e){
+        console.log("Clicked bear");
+    },false)
+//     <!-- Event Propogation
+//  Event Capturing , Event Bubbling 
+//      document.getElementById('bear').addEventListener('click',function(e){
+//         console.log(e);
+//     },false)-> this false is event bubbling
+//-->
+/*Clicking inside the owl acivates the clicked owl first and then activates the clicked inside ul sicne owl is inside ul this is 
+known as bubbling
+
+//  Event Capturing , Event Bubbling 
+//      document.getElementById('bear').addEventListener('click',function(e){
+//         console.log(e);
+//     },true)-> this true indicates event capturing
+when this bear is clicked the c licked inside UL gets activated first and then clicked 
+bear gets activated top to bottom
+//-->
+
+To stop either of them from happening use e.stopPropogation();
+*/
+
+document.getElementById('google').addEventListener('click', function(e){
+    e.preventDefault()//prevents form loading
+    e.stopPropagation()//stops event capturing
+    console.log('Google Clicked');
+}, false)
+
+// Target
+document.querySelector("#images").addEventListener('click', function(e){
+    console.log(e);
+    console.log(e.target);
+    if(e.target.tagName==='IMG'){
+        e.target.parentNode.remove();
+    }
+
+}, false)
+
+</script>
+</html>
+
+<!-- Dont inject events directly into elements in pure javascript 
+ event listener provide propogation abilities
+ document.getElementById('bear').addEventListener('click',function(){},false)// here false is default 3rd param hence not compulsory 
+ most are browser or mouse events-->
+
+ <!-- 
+ type
+ timestamp
+ defaultPrevented
+ target
+ toelement
+ source Element
+ currentTarget
+ clientX
+ clientY
+ offset
+ screenx
+ screeny
+ altkey
+ ctrlkey
+ keycode
+   -->
+
