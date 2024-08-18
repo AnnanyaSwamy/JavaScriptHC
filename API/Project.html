@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Data</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body{
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card{
+            padding: 20px;
+            overflow-wrap: anywhere;
+            width: 450px;
+            background-color: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .card>p{
+            overflow-wrap: break-word;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+    </div>
+</body>
+<script>
+    const UserApi="https://api.github.com/users/AnnanyaSwamy";
+    const xhr=new XMLHttpRequest();
+    xhr.open('GET',UserApi);
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState===4){
+        const data=JSON.parse(this.responseText);
+        document.querySelector(".card").innerHTML=`
+        <img src="${data.avatar_url}" alt="User-Avatar">
+        <p>${data.bio}</p>`
+    }}
+    xhr.send();
+</script>
+</html>

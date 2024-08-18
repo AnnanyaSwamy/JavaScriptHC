@@ -1,0 +1,130 @@
+<!-- //Api returns values in json structure
+//return something similar to what weve used below
+//keys and values in string format
+//sometimes returned in array format
+
+
+// {
+//     'coursename': "abcdef",
+//     'price': '12345',
+//     'courseInstructor': "xyzInstructor",
+// } -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpReq</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const ApiUrl="https://api.github.com/users/AnnanyaSwamy"
+    const xhr=new XMLHttpRequest();
+    xhr.open('GET', ApiUrl)
+    xhr.onreadystatechange=function(){
+        console.log(xhr.readyState);
+        if(xhr.readyState===4){
+            const data=JSON.parse(this.responseText);
+            console.log(data.avatar_url);
+        }
+    }
+    xhr.send();
+</script>
+</html>
+
+<!-- XMLHttpRequest (XHR) objects are used to interact with servers. 
+ You can retrieve data from a URL without having to do a full page refresh. 
+ Despite its name, XMLHttpRequest can be used to retrieve any type of data, 
+ not just XML. -->
+
+ <!-- 
+ Certainly! Let's go through the JavaScript code line by line, breaking down what's happening at each step.
+
+### 1. `const ApiUrl="https://api.github.com/users/AnnanyaSwamy";`
+- **Explanation:** 
+  - This line defines a constant variable named `ApiUrl` and assigns it the value of a URL as a string.
+  - This URL is an endpoint from GitHub's API, specifically pointing to the user profile of `AnnanyaSwamy`.
+  - When this URL is accessed, it provides data about this GitHub user, such as their avatar, username, public repositories, etc.
+
+### 2. `const xhr=new XMLHttpRequest();`
+- **Explanation:**
+  - Here, a new `XMLHttpRequest` object is created and stored in a constant variable called `xhr`.
+  - `XMLHttpRequest` is a built-in browser object that allows you to make HTTP requests to servers (e.g., to fetch data or send data).
+
+### 3. `xhr.open('GET', ApiUrl);`
+- **Explanation:**
+  - This line sets up the `xhr` object to make a request.
+  - The `.open()` method prepares the request. It takes two main arguments:
+    - `'GET'`: This is the HTTP method used to request data from the server. `GET` is commonly used when you want to retrieve data.
+    - `ApiUrl`: This is the URL we want to send the request to, which we defined earlier.
+  - Essentially, this line says: "Hey, `xhr`! Prepare to get some data from the `ApiUrl`!"
+
+### 4. `xhr.onreadystatechange=function(){ ... };`
+- **Explanation:**
+  - This sets up an event handler for the `xhr` object, which will run when the state of the request changes.
+  - `onreadystatechange` is an event that triggers every time the `readyState` of the `xhr` object changes (more on this below).
+  - Inside the `{ ... }` block, you define what should happen when this event is triggered.
+
+### 5. `console.log(xhr.readyState);`
+- **Explanation:**
+  - `xhr.readyState` is a property that holds the status of the `xhr` request. It can have values from 0 to 4:
+    - `0`: `UNSENT` - The request has not been sent yet.
+    - `1`: `OPENED` - The request has been set up (i.e., the `.open()` method has been called).
+    - `2`: `HEADERS_RECEIVED` - The request has been sent, and the headers and status are available.
+    - `3`: `LOADING` - The response is being received; some data has been received.
+    - `4`: `DONE` - The operation is complete, and the full response is available.
+  - `console.log(xhr.readyState)` prints the current state to the console, so you can see how the request progresses.
+
+### 6. `if(xhr.readyState===4){ ... }`
+- **Explanation:**
+  - This checks if the `xhr` request is in the `DONE` state (i.e., the `readyState` is `4`).
+  - If this condition is true, it means the entire response has been received from the server, and the code inside this block will run.
+
+### 7. `const data=JSON.parse(this.responseText);`
+- **Explanation:**
+  - `this.responseText` contains the raw response from the server, which is usually in JSON format (a structured way to represent data).
+  - `JSON.parse()` is a method that converts the JSON string into a JavaScript object.
+  - This converted object is stored in a constant variable named `data` for further use.
+
+### 8. `console.log(data.avatar_url);`
+- **Explanation:**
+  - This logs the value of `data.avatar_url` to the console.
+  - In the context of GitHub's API response for a user, `avatar_url` is the URL of the user's profile picture (avatar).
+  - So, this line prints the URL of the profile picture of the user `AnnanyaSwamy` to the console.
+
+### 9. `xhr.send();`
+- **Explanation:**
+  - This sends the HTTP request to the server.
+  - After calling this method, the browser will start the process of connecting to the server, sending the request, and waiting for the response.
+  - Once the response is received, the `onreadystatechange` event will trigger, and the appropriate code will execute based on the `readyState`.
+
+### Summary:
+- This code fetches user information from GitHub's API for the user `AnnanyaSwamy`.
+- It makes an HTTP `GET` request, waits for the full response, and then processes the JSON response to extract and print the URL of the user's avatar (profile picture).
+ -->
+
+ <!-- 
+ Actually, `xhr.send()` should remain **after** the `xhr.onreadystatechange` is defined. Here's why:
+
+### Order of Operations:
+
+1. **Setting up the `onreadystatechange` handler first**:  
+   - Before you send the request with `xhr.send()`, you want to ensure that you've already defined what should happen when the state of the request changes.
+   - This means setting up the `onreadystatechange` function, which will be triggered multiple times as the request progresses through its states.
+
+2. **Sending the request (`xhr.send()`) afterward**:  
+   - Once the handler is set up, you send the request.
+   - When you call `xhr.send()`, the request is sent to the server, and the browser starts monitoring the different states of the request.
+   - Since you've already defined the `onreadystatechange` function, it will automatically start reacting to changes in `readyState` as soon as they occur.
+
+### What Happens If `xhr.send()` Is Called Before `xhr.onreadystatechange`?
+
+- If you call `xhr.send()` before setting up the `onreadystatechange` handler, there's a chance that the request will change states (for example, go from `OPENED` to `LOADING`) before you've had the chance to define how to handle those state changes.
+- This could lead to missed states or unhandled responses, depending on how quickly the server responds and how the JavaScript engine executes the code.
+
+### Conclusion:
+- By placing `xhr.send()` after defining the `onreadystatechange` handler, you ensure that the response is properly handled, starting from the moment the request is sent and throughout the entire process. The order used in the code you've shown is correct.
+ -->
