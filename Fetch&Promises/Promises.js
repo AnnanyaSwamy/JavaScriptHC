@@ -1,93 +1,108 @@
 // The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
-//have 3 states pending fulfilled and rejected
-const promiseOne= new Promise(function(resolve, reject){
-    //Do an async task
-    //DB calls, cryptograpgy, network
+// Promises have 3 states: pending, fulfilled, and rejected.
+
+const promiseOne = new Promise(function(resolve, reject){
+    // Do an async task (e.g., DB calls, cryptography, network requests)
     setTimeout(function(){
-        console.log("Async task is comeplete");
-        resolve()//as soon as this runs it connects with then can also have val as arguments
-    })
+        console.log("Async task is complete");
+        resolve(); // Resolves the promise, allowing the .then() method to be executed.
+    }, 1000); // Simulating a delay of 1 second.
 });
-//Q and Bluebird-> before promises we had Q and BlueBird for asynchronous programming, using these we can use core js functionalities  that are done by .fetch.catch.finally now, now required now
-//reduces callback hell->callback nesting
 
+promiseOne.then(function(){
+    console.log("Promise Consumed"); // Logs when the promise is fulfilled.
+});
 
-promiseOne.then(function(){//this fucntion receives a value from the work that has been completed above
-    console.log("Promise Consumed");
-})
-//resolve connectied with .then
-
+// Another Promise example with a delay
 
 new Promise(function(resolve, reject){
     setTimeout(function(){
-        console.log("Async task 2")
-        resolve();
-    },1000)
+        console.log("Async task 2");
+        resolve(); // Resolves the promise after 1 second.
+    }, 1000);
 }).then(function(){
-    console.log("Async 2 resolved")
-})
-
-
-
-////////////////////////////////////////////////////////
-const promiseThree=new Promise(function(resolve, reject){
-    setTimeout(function(){
-        resolve({username:"abc", email: "example@example.com"})
-    },1000)
-})
-
-promiseThree.then(function(user){
-    console.log(user);
-})
-
-///////////////////////////////////////////////////////
-
-const promiseFour=new Promise(function(resolve, reject){
-    setTimeout(function(){
-        let error =false;
-        if(!error){
-            resolve({username:"abcdef", pwd:"123"});
-        }
-        else{
-            reject('Error: Something Went Wrong')
-        }
-    },1000)
+    console.log("Async 2 resolved"); // Logs when the second promise is fulfilled.
 });
 
-promiseFour.then(user=>{
-    console.log(user);
-    return user.username
-}).then((username)=>{
-    console.log(username);
-}).catch(function(err){
-    console.log(err);
-}).finally(()=>console.log("The promise is either resolved or rejected"))
+// Returning data from a Promise
 
-///////////////////////////////////////////////////////
-
-const promiseFive=new Promise(function(resolve,reject){
+const promiseThree = new Promise(function(resolve, reject){
     setTimeout(function(){
-        let error =true;
-        if(!error){
-            resolve({username:"JavaScript", pwd:"123456"});
-        }
-        else{
-            reject('Error: JS Went Wrong')
-        }
-    },1000)
-})
-//promises can also be 
-//handled using async 
-//await not just then catch
+        resolve({username: "abc", email: "example@example.com"}); // Resolves with user data.
+    }, 1000);
+});
 
-async function consumePromiseFive(){//does not directly handle errors, automatically expects that a value is always received
-    try{
-        const res=await promiseFive
-        console.log(res);
-    }catch(err){
-        console.log(err);
+promiseThree.then(function(user){
+    console.log(user); // Logs the user data once the promise is fulfilled.
+});
+
+// Handling errors with .catch
+
+const promiseFour = new Promise(function(resolve, reject){
+    setTimeout(function(){
+        let error = false; // Change to true to simulate an error.
+        if (!error) {
+            resolve({username: "abcdef", pwd: "123"}); // Resolves with user credentials.
+        } else {
+            reject('Error: Something Went Wrong'); // Rejects the promise if there's an error.
+        }
+    }, 1000);
+});
+
+promiseFour.then(user => {
+    console.log(user); // Logs the user data.
+    return user.username; // Returns the username for the next .then().
+}).then(username => {
+    console.log(username); // Logs the username.
+}).catch(function(err){
+    console.log(err); // Logs any errors if the promise is rejected.
+}).finally(() => console.log("The promise is either resolved or rejected")); // Runs regardless of resolve or reject.
+
+// Using async/await for promises
+
+const promiseFive = new Promise(function(resolve, reject){
+    setTimeout(function(){
+        let error = true; // Change to false to simulate success.
+        if (!error) {
+            resolve({username: "JavaScript", pwd: "123456"}); // Resolves with user credentials.
+        } else {
+            reject('Error: JS Went Wrong'); // Rejects the promise if there's an error.
+        }
+    }, 1000);
+});
+
+async function consumePromiseFive(){
+    try {
+        const res = await promiseFive; // Awaits the result of the promise.
+        console.log(res); // Logs the result if the promise is fulfilled.
+    } catch (err) {
+        console.log(err); // Catches and logs any errors if the promise is rejected.
     }
 }
 
-consumePromiseFive();
+consumePromiseFive(); // Executes the async function.
 
+// Fetching data from an API with async/await
+
+async function getAllUsers(){
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users'); // Awaits the fetch response.
+        const data = await response.json(); // Converts the response to JSON.
+        console.log(data); // Logs the data received from the API.
+    } catch (err) {
+        console.log('E: ', err); // Catches and logs any errors during the fetch.
+    }
+}
+
+getAllUsers(); // Executes the function to fetch and log user data.
+
+// Fetching data using .then() and .catch()
+
+fetch('https://jsonplaceholder.typicode.com/users')
+    .then((response) => {
+        return response.json(); // Converts the response to JSON.
+    })
+    .then((data) => {
+        console.log(data); // Logs the data received from the API.
+    })
+    .catch((error) => console.log(error)); // Catches and logs any errors during the fetch.
