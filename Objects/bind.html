@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bind</title>
+</head>
+<body>
+    <button>Button Clicked</button>
+</body>
+<script>
+    class React{
+        constructor(){
+            this.library="React";
+            this.server="https://localhost:300"
+
+            //requirement
+            document.querySelector("button").addEventListener('click',this.handleClick.bind(this));
+
+        }
+        handleClick(){
+            console.log("button clicked");
+            console.log(this.server);//returns undefined before binding
+            console.log(this)//returns button
+        }
+    }
+
+    const app=new React();
+</script>
+</html>
+
+<!-- 
+
+The bind() method in JavaScript is used to create a new function that, when 
+called, has its this keyword set to the provided value. This is especially
+ useful when working with event handlers or callbacks, where the value 
+ of this might change depending on the context in which the function is 
+ called.
+
+Explanation:
+Class and Constructor:
+
+The React class has a constructor that initializes two properties: library and server. The constructor also sets up an event listener on a button.
+Event Listener Without bind:
+
+Normally, if you attach an event listener to a DOM element like this:
+javascript
+Copy code
+document.querySelector("button").addEventListener('click', this.handleClick);
+the value of this inside handleClick would refer to the element that triggered the event (the button) instead of the React instance.
+Using bind(this):
+
+To ensure that this inside handleClick refers to the instance of the React class (and not the button), we use bind(this) when passing handleClick to the event listener.
+this.handleClick.bind(this) creates a new function where this is bound to the React instance. This ensures that when handleClick is triggered by the button click, this will still refer to the React instance.
+What Happens on Button Click:
+
+When the button is clicked, the handleClick method is executed. Because of the bind(this), inside handleClick:
+this.server correctly logs "https://localhost:300" (the value from the React instance).
+this correctly refers to the React instance, not the button.
+Without bind(this):
+If you didn’t use bind(this), then:
+
+this.server would be undefined because this would refer to the button element, which doesn't have a server property.
+this would refer to the button element itself, not the React instance.
+Conclusion:
+Using bind(this) ensures that the context (this) inside the handleClick method is preserved as the instance of the React class, allowing the method to correctly access class properties like server and library.
+-->
